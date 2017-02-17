@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Towed Vehicle Data base</title>
+        <style>
+        ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+background-color:#4CAF50;
+}
+    
+        body {background-color: gray;}
+            p, h1 {font-family: helvetica;}
+            p {font-size:1.5em;line-height:1.5em; margin-left: 24px;}
+            pre {font-size: 2em;}
+            h2{color:red;}
+            .undefined{background-color:red;}
+            div{border: 2px solid blue; margin: 5px; border-radius: 10px; background-color: #ededed;}
+            #searchForm > input.searchField.textPrompt.prompt
+        </style>
+        
+    </head>
+    
+    <body>
+        
+<div class="center">
+    
+  <img src="http://www.andiamocreative.com/wp-content/uploads/2015/05/Seal_of_Chicago_Illinois.svg_-1024x1024.png" style="width:75px;height:75px;" size="30%"> <br> City of Chicago <br> Phone: (312) 744-5000 <br> 121 N LaSalle St, Chicago, IL 60602
+
+</div>
+ <ul>
+  <li><a href="https://preview.c9users.io/omolina1/webdev1617/towed2.html?_c9_id=livepreview0&_c9_host=https://ide.c9.io">Home</a></li>
+  <li><a href="https://data.cityofchicago.org/Transportation/Towed-Vehicles/ygr5-vcbg">Data Portal</a></li>
+  <li><a href="https://docs.google.com/document/d/15-AVGqQJ2XZbxVynYMfHF9EJPEU2RbqL8THa7R25lrk/edit?pli=1">More</a></li>
+</ul><br>
+<center>
+<h1> Towed Vehicles Data Base</h1>  
+
+ <div id="form">
+        <input type="text" id="txtPlate" placeholder="Enter your license plate"> 
+    </div>
+ 
+ <div id="piechart" style="width: 600px; height: 200px;"></div>
+<div id="Line"></div>
+<h1>Recently Towed</h1></center>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+            
+  
+    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+var currentDate = data[0].tow_date;          
+var sil = 0;
+var blk = 0;
+var whi = 0;
+var gry = 0;
+var blu = 0;
+var other = 0;
+
+           $.each(data, function(i,v){
+                           if(v.tow_date == currentDate){
+                                if(v.color == "SIL") {
+                                   sil++;
+                               } else if(v.color == "BLK"){
+                                   blk++;
+                               } else if(v.color == "GRY") {
+                                   gry++;
+                               } else if(v.color == "WHI") {
+                                   whi++;
+                               } else if(v.color == "BLU") {
+                                   blu++;
+                               } else {
+                                   other++;
+                               }
+                           }
+                        })
+           
+        var data = google.visualization.arrayToDataTable([
+          ['Color', 'Number of Towed Vehicles'],
+          ['Silver',     sil],
+          ['Black',      blk],
+          ['White',  whi],
+          ['Gray', gry],
+          ['Blue',   blu]
+          ['Other',  other]
+        ]);
+
+        var options = {
+          title: 'Color of towed Vehilces Today'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+        /*
+            This script retrieves tow service data for ___
+            from the 
+            City of Chicago Data Portal
+            
+            This script doesn't update the DOM.
+
+        */
+
+        // base URL to the food inspections data
+        var baseURL = 'https://data.cityofchicago.org/resource/rp42-fxjt.json';
+        
+        // optional filters we're appending - status
+        var filters = '';
+        
+        // full URL
+        var url = baseURL + filters;
+        
+        console.log (url);
+        
+        $(
+            
+            
+            $.getJSON(url)
+            
+            
+                .done (function (data) {
+                    // TODO:
+                    console.log(data);
+
+                    // loop through the records
+                    
+                    $.each(data, function cars(index, value){
+                       var html = "<div><ul><li><h2> License plate: " + value.plate + "</h2></li>" +
+                                    "<li><p>Make: " + value.make + "<br>" +
+                                    "Date of Tow: " + value.tow_date +
+                                    "</p></li>" + "<li><h2> Pick Up Your Car: " + value.tow_facility_phone + "<br> Pick Up Your Car: " + value.towed_to_address +
+                                    "</div></li></ul>";
+                                    
+                        $("body").append(html);
+                    });
+                })
+            
+            
+        )
+       
+       $(function () {    // don't execute code until DOM is ready
+            /*
+                most code should wait for the button click event,
+                but creating and setting some variables *can* be 
+                done when the page loads
+            */
+
+            // api endpoint for the towed vehicle data
+            var baseURL = 'https://data.cityofchicago.org/resource/ygr5-vcbg.json';
+            
+            // optional filters we're appending: plate
+            var filters = '?plate=';
+            
+            // the url; we'll append the plate number in button click
+            var url = baseURL + filters;   
+            
+            console.log (url);
+            
+            // start with button disabled
+            $("#btnSearch").attr("disabled", true);
+            
+            // enable button only if text in input box
+            $("#txtPlate").keyup(function(){   // change event doesn't work, so using keyup 
+                if ($("#txtPlate").val() == "") {   // if value is empty
+                    $("#btnSearch").attr("disabled", true)  // set disabled
+                }
+                else {
+                    $("#btnSearch").attr("disabled", false);
+                }
+            });
+            
+            
+            
+         
+           
+            // we want to get the data and display on button click
+            $("#btnSearch").on("click", function() {
+                
+                // each time we search, we need to clear the results
+                $("#results").html("");
+                
+                // get the input plate number
+                //   and append to url in getJSON call
+                var plateNum = $("#txtPlate").val();
+           
+                var urlWithParams = url + plateNum;
+                console.log(urlWithParams);  // verify that it's being created correctly
+           
+                // jQuery command to retrieve json data
+                
+                $.getJSON(urlWithParams)       // append the plateNum
+                    .done (function (data) {    // execute this function when getJSON is done
+                        
+                        console.log(data);
+                        
+                        var numRecords = data.length;  // the length of the array
+                        
+                        // notify of number of records
+                        var message = 
+                            "<p>Records found: "
+                            + numRecords
+                            + "</p>"
+                        
+                        $("#results").append(message);
+                        
+                        
+                        // only loop records if count > 0
+                        if (numRecords > 0) {
+                            // loop through the records
+                            $.each (data , 
+                                function (index, value) {
+                                    // append content to the body 
+                                    var html = "<div><ul><li><h2> License plate: " + value.plate + "</h2></li>" +
+                                    "<li><p>Make: " + value.make + "<br>" +
+                                    "Date of Tow: " + value.tow_date +
+                                    "</p></li>" + "<li><h2> Pick Up Your Car: " + value.tow_facility_phone + "<br> Pick Up Your Car: " + value.towed_to_address +
+                                    "</div></li></ul>";
+                                   
+                                   
+                                    $("#results").append(html);
+     
+                            
+                                
+                                }  // end of function
+                            
+                            ); // end of each loop                            
+                        
+                        }   // end of if statement
+
+                    })  // end of getJSON
+            
+            })  // end of button click event
+        
+        }) // end of jQuery wrapper
+    </script>
+    </body>
+</html>
