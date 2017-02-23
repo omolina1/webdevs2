@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sex offenders</title>
+        <style>
+        body {background-color: gray;}
+            p, h1 {font-family: helvetica;}
+            p {font-size:1.5em;line-height:1.5em; margin-left: 24px;}
+            pre {font-size: 2em;}
+            .Fail{background-color:red;}
+            .Pass{background-color:green;}
+            div{border: 1px solid black; margin: 4px; border-radius: 5px; background-color: #ededed;}
+        </style>
+        
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    
+                        var WHITE = 0;
+                        var BLACK = 0;
+                        var Other = 0;
+                        var WHITE_HISPANIC = 0;
+                        
+                        $.each(data, function(i,v){
+                           
+                                if(v.race == "Black") {
+                                   BLACK++;
+                               } else if(v.color == "White"){
+                                   WHITE++;
+                            } else if(v.color == "White Hispanic"){
+                                   WHITE_HISPANIC++;
+                               } else {
+                                   Other++;
+                               }
+                           
+                        })
+    
+    
+    
+    
+    
+    
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Black',     BLACK],
+          ['White',      WHITE],
+          ['White Hispanic',   WHITE_HISPANIC]
+          ['Other', Other],
+          
+        ]);
+
+        var options = {
+          title: 'Sex Offender Race'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+        
+    </head>
+    <body>
+        <center>
+ 
+<h1> Sex offenders in CHICAGO</h1> 
+ <div id="piechart" style="width: 400px; height: 300px;"></div></center>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        /*
+            This script retrieves 311 pot hole service request data for
+            City of Chicago Data Portal
+           
+            
+            This script doesn't update the DOM.
+        
+        
+        */
+       
+        // base URL to the food inspections data
+        var BaseURL = 'https://data.cityofchicago.org/resource/cjcg-yw47.json';
+        
+        // optional filters we're appending - date range and zip
+        var filters = '';
+        
+        // full URL
+        var Url = BaseURL + filters;
+        
+        console.log (Url);
+        
+        $(
+            // jQuery command to retrieve json data
+            
+            $.getJSON(Url)
+                .done (function (data) {
+                    // TODO:  add script to add data to the DOM
+                    console.log(data);
+                        Url = data;
+                    // loop through the records
+                    
+                    $.each(data, function(index, value){
+                       var html = "<div><h1>" + value.first + "</h1>" +
+                                    "<p>Gender: " + value.gender + "<br>" +
+                                    "Age: " + value.age + "<br>" + "Race:" +
+                                    value.race  +  "<br>" + "Location: " +
+                                    value.block  +
+                                    "</p>" +
+                                    "</div>";
+                                    
+                        $("body").append(html);
+                    });
+                })
+            
+            
+        )
+        
+   </script>
+    </body>
+</html>
