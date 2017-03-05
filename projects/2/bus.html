@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  
+ 
+  
+  button {
+    background-color:#55a8ed;
+    border: 1px solid black;
+    color:white;
+    padding:10px 64px;
+    margin: 4px; border-radius: 5px;
+    font-size:20px;
+    
+  }
+  
+.demo-layout-transparent {
+  background: url('../assets/demos/transparent.jpg') center / cover;
+}
+.demo-layout-transparent .mdl-layout__header,
+.demo-layout-transparent .mdl-layout__drawer-button {
+  /* This background is dark, so we set text to white. Use 87% black instead if
+     your background is light. */
+  color: white;
+}
+</style>
+
+  
+  
+  
+  
+  <meta charset="utf-8">
+  <title>jQuery.parseXML demo</title>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<center><body>
+  <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Bus Tracker</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="bus.html">Home</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="bus.html">Page 1</a></li>
+            <li><a href="bus2.html">Page 2</a></li>
+            <li><a href="bus3.html">Page 3</a></li>
+          </ul>
+        </li>
+        <li><a href="bus2.html">Page 2</a></li>
+        <li><a href="bus3.html">Page 3</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+       
+      </ul>
+    </div>
+  </div>
+</nav>
+   <body style="background-image:url(solid.png)">
+<div class="container">
+  <h1>Welcome!</h1>
+  <p>This page can help you find your nearest bus, find a stop, of find the name of a route!
+  <p></p>
+</div>
+  <h1>Bus Routes</h1>
+  <p>Click one to ses a map of the route. (wip)</p>
+<br>
+
+<div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script>
+        $(function() {
+          
+          
+          var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+          
+          var apiEndpoint = "http://ctabustracker.com/bustime/api/v2/getroutes";
+          
+          
+          $.ajax({
+              url: apiPassThruUrl,
+              dataType: "json",
+              method: 'GET',
+              data: {"apiEndpoint": apiEndpoint,
+                      "key" : "NyTeN2Y6uGi8rDmFLRvutfbeF",
+                      "format":"json"}
+            }).done (function (data) {
+              console.log(data);
+              $("body").append("");
+             
+              $.each(data["bustime-response"]["routes"], function(i,v) {
+                  $("body").append("<center><button id='button' onclick='bus2.html;'>" + "Route #" + v.rt + ",<br> " + v.rtnm + "<br>" + "</button>" + "<br>");
+                
+              })
+
+            });
+        });
+            
+  
+</script>
+ 
+</body>
+</html>
