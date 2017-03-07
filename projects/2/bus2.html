@@ -1,5 +1,21 @@
 <html>
     <head>
+      <style>
+        div {
+          
+        }
+        button {
+    background-color:#55a8ed;
+    border: 1px solid black;
+    color:white;
+    padding:10px 64px;
+    margin: 4px; border-radius: 5px;
+    font-size:20px;
+    
+  }
+      </style>
+      
+      
         <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -37,7 +53,34 @@
     </div>
   </div>
 </nav>
-<script>
+ <center><h1><em>Predict Your Bus</em></h1>
+        <div id="space"><br></div>
+        <div id="select">Find Your Page<br><br>
+        <button><a href="bus.html">Tracker Home</a></button>
+        <button><a href="predictor.html">Predict Your Bus</a></button></div>
+        <div class="space"><br><br></div>
+        <div class="border" width="400px">
+        </div>
+        <div class="space"><br><br></div>
+    
+        <div id="select">
+            <select id="selector">
+                <option id="1" value="8417">Western & Addison: Northbound</option>
+                <option id="2" value="8195">Western & Addison: Southbound</option>
+                <option id="3" value="12569">Addison & Western: Westbound</option>
+                <option id="4" value="12527">Addison & Western: Eastbound</option>
+            </select>
+            <br><br>
+            <button id="button" onclick="findbus();">Find Prediction</button>
+            <br><h2>Your Bus!</h2>
+        </div>
+        <div class="space"><br><br></div>
+        <div id="thisdiv"></div>
+        <div id="space"><br><br></div>
+        <div id="buses"><br></div>
+        <div id="space"><br><br></div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script>
 function findbus() {
     $(function() {
         
@@ -70,7 +113,7 @@ function findbus() {
 
         $.each(data["bustime-response"]["prd"], function(i, v) {
 
-          $("#buses").append("<div>Destination: " + "<br>" + v.des + "<br>" + " Route Direction: "+ "<br>" + v.rtdir + "<br>" + " Predicted Time: " + "<br>" + v.prdtm + "<br><br></div>");
+          $("#buses").append("<div>Destination: " + "<br>" + v.des + "<br>" + " Route Direction: "+ "<br>" + v.rtdir + "<br>" + " Predicted Time to Arrival: " + "<br>" + v.prdctdn + " minutes to go" + "<br><br></div>");
 
         });
 
@@ -78,7 +121,6 @@ function findbus() {
     });
 }
 </script>
-
-
     </body>
 </html>
+   
