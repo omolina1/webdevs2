@@ -1,9 +1,40 @@
 <html>
-    <head></head>
-    <body>
-   <html>
   <head>
     <style>
+    #bot{
+      background-color:black;
+    }
+    #me{
+      Background-color:white;
+      color:Black;
+    }
+    #ign{
+      Background-color:red;
+      color:white;
+    }
+    #rot{
+      Background-color:Gold;
+      color:BLACK;
+    }
+    #top{
+      height:;
+    }
+    #titleb{
+      height:300;
+      background-color:black;
+    }
+.demo-card-wide.mdl-card {
+  width: 1250px;
+  
+}
+.demo-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 176px;
+  background: url('../assets/demos/welcome_card.jpg') center / cover;
+}
+.demo-card-wide > .mdl-card__menu {
+  color: #fff;
+}
     body {
     background-color:#333133;
 }
@@ -47,17 +78,86 @@
           
         </nav>
       </div>
-      <main class="mdl-layout__content">
-        <div id="screen1" class="screen page-content"></div>
-        <div id="screen2" class="screen page-content">Screen 2</div>
-        <div id="screen3" class="screen page-content">Screen 3</div>
-      
-      </main>
-    </div>
-   <div> <iframe width="560" height="315" srsc="https://www.youtube.com/embed/J0pfNnwNGC0" frameborder="0" allowfullscreen></iframe>
-   </div>
+    </div><br><br><br><br><center>
+    <div>
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+  <div id="titleb" class="mdl-card__title">
+   
+    <iframe width="350" height="250" src="https://www.youtube.com/embed/1lw-bdxOP0k?list=PLHEZ2hhwMMdqROFrs4DB5b_Sm931qNN7N" frameborder="0"></iframe>
+  </div>
+  <div class="mdl-card__supporting-text">
+    <h1>8/10</h1>
+    <p>This little game has gotten zero support from it's publisher. That is too bad because this game has a future and a mythos that could expand to into a successful syfi. The game as it stands is repetitive, but yet engaging. Games can last from 10 minutes to well over an hour as 2 sides fight for dominace in this top down RTS. </p>
+  </div>
+  <div id="bot" class="mdl-card__actions mdl-card--border">
+    <a id="me" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://www.youtube.com/watch?v=1lw-bdxOP0k&list=PLHEZ2hhwMMdqROFrs4DB5b_Sm931qNN7N&index=3">
+    MY REVIEW
+    </a>
+    <a id="ign" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="http://www.ign.com/articles/2014/08/21/airmech-arena-review">
+      IGN
+    </a>
+     <a id="rot" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://www.gamespot.com/airmech-arena/">
+      GAMESPOT
+    </a>
+  </div>
+  <div class="mdl-card__menu">
+    
+  </div>
+</div><br><br>
+  <div>
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+  <div id="titleb" class="mdl-card__title">
+   
+    <iframe width="350" height="250" src="https://www.youtube.com/embed/6ZbhcCz5M2o?list=PLHEZ2hhwMMdqROFrs4DB5b_Sm931qNN7N" frameborder="0"></iframe>
+  </div>
+  <div class="mdl-card__supporting-text">
+    <h1>8/10</h1>
+    <p>This review was done in preperation for Fallout 4. Fallout 3 is a gem and a masterpiece. the game certainly shows it's age and it's gameplay is just the smallest bit </p>
+  </div>
+  <div id="bot" class="mdl-card__actions mdl-card--border">
+    <a id="me" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://www.youtube.com/watch?v=6ZbhcCz5M2o&index=6&list=PLHEZ2hhwMMdqROFrs4DB5b_Sm931qNN7N">
+    MY REVIEW
+    </a>
+    <a id="ign" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="http://www.ign.com/articles/2009/10/15/fallout-3-game-of-the-year-edition-review">
+      IGN
+    </a>
+     <a id="rot" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://www.gamespot.com/fallout-3/">
+      GAMESPOT
+    </a>
+  </div>
+  <div class="mdl-card__menu">
+    
+  </div>
+</div><br><br>
+<div>
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+  <div id="titleb" class="mdl-card__title">
+   
+    <iframe width="350" height="250" src="https://www.youtube.com/embed/YiMNAnJp3S4" frameborder="0"></iframe>
+  </div>
+  <div class="mdl-card__supporting-text">
+    <h1>-/10</h1>
+    <p>This was a joke. Go check it out though! Sequeal coming soon!</p>
+  </div>
+  <div id="bot" class="mdl-card__actions mdl-card--border">
+    <a id="me" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://www.youtube.com/watch?v=YiMNAnJp3S4">
+    MY REVIEW
+    </a>
+    
+  </div>
+  <div class="mdl-card__menu">
+    
+  </div>
+</div>
+         <embed src="myapp2.mp3" autostart="true" loop="true"
+width="2" height="0">
+</embed>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
+     $(document).ready(function(){
+    $('ul.tabs').tabs();
+  });
+       
         $(function(){
            $("#screen1").show(); 
            
@@ -80,5 +180,4 @@
     
   </body>
 </html>
-    </body>
-</html>
+    
