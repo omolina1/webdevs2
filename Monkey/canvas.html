@@ -53,22 +53,23 @@
     </div><center><br><br><br><br>
     <canvas id="myCanvas" height="600" width="1150"/>
 <script>
+var img = new Image();
+img.src = 'mr2.jpg';
+img.width = 1000;
+img.height = 1000;
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
-var ballRadius = 10;
+var ballRadius = 15;
 var x = canvas.width/2;
 var y = canvas.height-30;
 var dx = 2;
 var dy = -2;
 
-var img = new Image();
-img.src = 'mr2.jpg';
-img.width = 1000;
-img.height = 1000;
-
 function drawImage(){ 
 ctx.beginPath()
-ctx.drawImage(img, 150, 150, 10, 10);
+ctx.drawImage(img, 150, 150, 150, 150);
+ctx.arc(x, y, ballRadius, 0, Math.PI*5);
+ctx.fillStyle = "#000000"
 ctx.fill();
 ctx.closePath()
 
@@ -84,7 +85,7 @@ function drawBall() {
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawBall();
+    drawImage();
     
     if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
         dx = -dx;
